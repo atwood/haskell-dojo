@@ -12,7 +12,9 @@ _DISPLAY_LOGO_ = True
 
 -- Q#03
 
-convertRowIndex = undefined
+-- convertRowIndex = undefined
+-- convertRowIndex i =  (fromEnum (toUpper i )) - 65
+convertRowIndex =  (-65 +).fromEnum.toUpper
 
 -- Q#04
 
