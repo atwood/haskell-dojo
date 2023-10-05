@@ -18,16 +18,19 @@ convertRowIndex =  (-65 +).fromEnum.toUpper
 
 -- Q#04
 
-_INVALID_MOVE_ = undefined
+-- _INVALID_MOVE_ = undefined
+_INVALID_MOVE_ = (-1,-1)
 
 -- Q#05
 
-_SEP_ = undefined
+-- _SEP_ = "_|_"
+-- _SEP_ = ['_', '|', '_']
+_SEP_ = "_|_"
+
 
 -- Q#06
 
-data Square
-
+data Square = X | O | Empty deriving (Read, Show, Eq)
 -- Q#07
 
 data GameState
