@@ -70,8 +70,14 @@ showGameState state = case state of
 
 -- Q#11
 
-switchPlayer = undefined
+-- switchPlayer = undefined
+switchPlayer X = O
+switchPlayer O = X
+switchPlayer Empty = Empty
 
 -- Q#12
 
-showSquare = undefined
+-- showSquare = undefined
+showSquare X     = "X"
+showSquare O     = "O"
+showSquare Empty = "_"
