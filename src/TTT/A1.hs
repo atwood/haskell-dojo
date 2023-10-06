@@ -33,7 +33,7 @@ _SEP_ = "_|_"
 data Square = X | O | Empty deriving (Read, Show, Eq)
 -- Q#07
 
-data GameState
+data GameState = XWon | OWon | Tie | InProgress deriving (Read, Show, Eq)
 
 -- Q#08
 
