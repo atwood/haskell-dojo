@@ -44,9 +44,14 @@ type Move = (Int, Int)
 
 -- Q#09
 
-getFirstPlayer = undefined
+-- getFirstPlayer = undefined
+getFirstPlayer bool =
+    if bool then X
+       else O
 
-getFirstPlayer_ = undefined
+-- getFirstPlayer_ = undefined
+getFirstPlayer_ True = X
+getFirstPlayer_ False = O
 
 -- Q#10
 
