@@ -55,7 +55,18 @@ getFirstPlayer_ False = O
 
 -- Q#10
 
-showGameState = undefined
+-- showGameState = undefined
+{- 
+showGameState XWon = "X won"
+showGameState OWon = "O Won"
+showGameState Tie  = "Tie"
+showGameState InProgress = "In Progress"
+-} 
+showGameState state = case state of
+    XWon -> "X won"
+    OWon -> "O Won"
+    Tie  -> "Tie"
+    InProgress -> "In Progress"
 
 -- Q#11
 
