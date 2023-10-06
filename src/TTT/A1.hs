@@ -36,6 +36,11 @@ data Square = X | O | Empty deriving (Read, Show, Eq)
 data GameState = XWon | OWon | Tie | InProgress deriving (Read, Show, Eq)
 
 -- Q#08
+type Player = Square
+type Row = [Square]
+type Line = [Square]
+type Board = [Row]
+type Move = (Int, Int)
 
 -- Q#09
 
