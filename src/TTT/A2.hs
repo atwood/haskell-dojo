@@ -3,6 +3,7 @@ module TTT.A2 where
 import Data.List (intercalate)
 import TTT.A1
 import GHC.Stack.Types (CallStack(EmptyCallStack))
+import Data.Char (toUpper)
 
 -- Q#01
 
@@ -70,7 +71,21 @@ isColInBounds = isRowInBounds
 
 -- Q#09
 
-stringToMove = undefined
+-- stringToMove = undefined
+stringToMove str | (length str < 2) = (-1,-1)
+stringToMove (h:t) = (toRow h, (toCol t))
+stringToMove _     = (-1,-1)
+
+-- toRow c = -65 -- + (fromEnum (toUpper c))
+toRow c = -65 +  (fromEnum (toUpper c))
+
+{- want to use readMaybe, but it's not in scope here, and I don't feel like casing imports A.t.m
+toCol str = case (readmaybe str::Int) of
+    Nothing -> -1
+    Just n  ->  n
+-}
+toCol str =  read str::Int
+
 
 -- Q#10
 
