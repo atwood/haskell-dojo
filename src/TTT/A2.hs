@@ -5,11 +5,19 @@ import TTT.A1
 
 -- Q#01
 
-promptPlayer = undefined
-
+-- promptPlayer = undefined
+promptPlayer p = do
+    -- print $ "blah " ++ (show p) ++ " asdfsadf"
+    -- print $ "Player " ++ (show p) ++ "'s turn: enter a row and column position (ex. A1)"   
+    print $ concat ["Player "
+                   ,show p
+                   , "'s turn: enter a row and column position (ex. A1)"
+                   ] 
+    return (getLine)
 -- Q#02
 
-_RANGE_ = undefined
+-- _RANGE_ = undefined
+_RANGE_ = [0..(-1 + _SIZE_)]
 
 -- Q#03
 
