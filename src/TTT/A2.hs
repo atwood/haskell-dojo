@@ -4,6 +4,7 @@ import Data.List (intercalate)
 import TTT.A1
 import GHC.Stack.Types (CallStack(EmptyCallStack))
 import Data.Char (toUpper)
+import GHC.RTS.Flags (DebugFlags(stable))
 
 -- Q#01
 
@@ -77,7 +78,7 @@ stringToMove (h:t) = (toRow h, (toCol t))
 stringToMove _     = (-1,-1)
 
 -- toRow c = -65 -- + (fromEnum (toUpper c))
-toRow c = -65 +  (fromEnum (toUpper c))
+toRow c = -65 + (fromEnum (toUpper c))
 
 {- want to use readMaybe, but it's not in scope here, and I don't feel like casing imports A.t.m
 toCol str = case (readmaybe str::Int) of
@@ -86,7 +87,18 @@ toCol str = case (readmaybe str::Int) of
 -}
 toCol str =  read str::Int
 
-
 -- Q#10
 
-replaceSquareInRow = undefined
+-- replaceSquareInRow = undefined
+replaceSquareInRow p idx row | (idx<0) = row 
+replaceSquareInRow p idx row | idx >= (length row) = row
+replaceSquareInRow p idx row = let 
+    (a,b) = splitAt idx row
+    theStart = a
+    theEnd = tail b
+    in concat [theStart
+     ,show p
+     ,theEnd]
+
+rsO idx row = replaceSquareInRow O idx row
+rsX idx row = replaceSquareInRow X idx row
