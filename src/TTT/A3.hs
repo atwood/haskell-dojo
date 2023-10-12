@@ -6,7 +6,13 @@ import TTT.A2
 
 -- Q#01
 
-showInts = undefined
+--showInts = undefined
+--show lst -- show is already has a list instance
+--map show lst
+showInts [] = []
+showInts (h:t) = show h : (showInts t)
+
+t = 0 
 
 _HEADER_ = undefined
 
