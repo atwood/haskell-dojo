@@ -15,7 +15,12 @@ _DISPLAY_LOGO_ = True
 -- convertRowIndex = undefined
 -- convertRowIndex i =  (fromEnum (toUpper i )) - 65
 convertRowIndex =  (-65 +).fromEnum.toUpper
-
+cRI char = let 
+    tmp1 = toUpper char
+    tmp2 = fromEnum tmp1
+    tmp3 = tmp2 - 65
+    in tmp3
+cRI2 char = fromEnum (toUpper char) - 65  
 -- Q#04
 
 -- _INVALID_MOVE_ = undefined
@@ -50,8 +55,13 @@ getFirstPlayer bool =
        else O
 
 -- getFirstPlayer_ = undefined
+{- forgot to use guards as directed
 getFirstPlayer_ True = X
 getFirstPlayer_ False = O
+-}
+getFirstPlayer_ p | p == 'X' = X
+getFirstPlayer_ p | p == 'O' = O
+getFirstPlayer_ p | True     = Empty
 
 -- Q#10
 
