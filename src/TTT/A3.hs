@@ -54,12 +54,19 @@ dropLastCol board = map (take (fromIntegral (_SIZE_ - 1))) board
 
 -- Q#06
 
-getDiag1 = undefined
+--getDiag1 = undefined
 
-getDiag2 = undefined
+-- JWA 2013-Oct-13 Ooh, remember list comprehensions?
+getDiag1 board = [board!! (fromIntegral r) !! (fromIntegral c) | r<-_RANGE_, c<-_RANGE_, r==c]
+--getDiag2 = undefined
+getDiag2 board = [board!! (fromIntegral r) !! (fromIntegral c) | r<-_RANGE_, c<-(reverse _RANGE_), (_SIZE_ - 1)==r+c]
 
-getAllLines = undefined
 
+--getAllLines = undefined
+getAllLines board = concat [board
+    ,(transpose board)
+    ,[getDiag1 board, getDiag2 board]
+    ]
 -- Q#07
 
 putSquare = undefined
