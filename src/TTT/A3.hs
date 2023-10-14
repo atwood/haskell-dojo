@@ -98,4 +98,9 @@ isWinningLine p l = all (==p) l
 
 -- Q#10
 
-isValidMove = undefined
+--isValidMove = undefined
+isValidMove brd mv | not$isMoveInBounds mv = False
+isValidMove brd (r,c) = let 
+    (pre,post) = splitAt (fromIntegral r) brd
+    row = head post
+    in isColEmpty row (fromIntegral c)
