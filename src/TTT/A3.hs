@@ -70,7 +70,7 @@ getAllLines board = concat [board
 -- Q#07
 
 --putSquare = undefined
---putSquare :: Player -> Board -> Move -> Board
+putSquare :: Player -> Board -> Move -> Board
 putSquare pl [] mv = []
 putSquare pl brd (r,c) = let
    (rowsPre,rowsRest) = splitAt r brd
@@ -84,11 +84,17 @@ putSquare pl brd (r,c) = let
 t = [[0,1,2],[3,4,5],[6,7,8]]   
 -- Q#08
 
-prependRowIndices = undefined
+--prependRowIndices = undefined
+prependRowIndices lst = map f (zip idxs lst) where
+    idxs = ['A','B'..]
+    f (idx,str) = idx:str
 
 -- Q#09
 
-isWinningLine_ = undefined
+--isWinningLine_ = undefined
+
+isWinningLine p [] = False
+isWinningLine p l = all (==p) l
 
 -- Q#10
 
