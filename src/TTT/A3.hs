@@ -69,8 +69,19 @@ getAllLines board = concat [board
     ]
 -- Q#07
 
-putSquare = undefined
+--putSquare = undefined
+--putSquare :: Player -> Board -> Move -> Board
+putSquare pl [] mv = []
+putSquare pl brd (r,c) = let
+   (rowsPre,rowsRest) = splitAt r brd
+   row = head rowsRest
+   rowsLast = tail rowsRest
+   (colsPre,colsRest) = splitAt c row
+   colsLast = tail colsRest
+   newRow = concat [colsPre,[pl],colsLast]
+   in concat [rowsPre,[newRow],rowsLast]
 
+t = [[0,1,2],[3,4,5],[6,7,8]]   
 -- Q#08
 
 prependRowIndices = undefined
