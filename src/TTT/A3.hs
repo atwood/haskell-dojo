@@ -35,12 +35,15 @@ formatRows brd = map formatLine (map showSquares brd)
 
 -- Q#04
 
-{- JWA: 2023Oct13 This assignment seems malformed: isColEmpty doesn't need to be recursive, 
+{-  JWA: 2023Oct15 Oh, I see, recurse
+    JWA: 2023Oct13 This assignment seems malformed: isColEmpty doesn't need to be recursive, 
         but a function isRowEmpty might well be
 -}
 --isColEmpty = undefined
-isColEmpty row idx = Empty == row !! idx
-
+--isColEmpty row idx = Empty == row !! idx
+isColEmpty [] idx = True
+isColEmpty2 row idx = Empty == head row && (isColEmpty (tail row) (idx-1))
+--isColEmpty 
 isRowEmpty (c:[]) = (c==Empty)
 isRowEmpty (c:tail) = (c==Empty) && (isRowEmpty tail)
 
