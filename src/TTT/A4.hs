@@ -53,9 +53,20 @@ hasWon p b = any (\l->isWinningLine p l) (getAllLines b)
 
 -- Q#09
 
-getGameState = undefined
+--getGameState = undefined
+getGameState b | (hasWon X b) = XWon
+getGameState b | (hasWon O b) = OWon
+getGameState b | isInProgress b = InProgress
+getGameState b = Tie
 
-playMove = undefined
+isInProgress b = any (==Empty) (concat b)
+
+--playMove = undefined
+playMove :: Player -> Board -> Move -> (GameState, Board)
+playMove p b mv = 
+    let newB = putSquare p b mv
+        newState = getGameState newB
+    in (newState, newB)
 
 -- Q#10
 
