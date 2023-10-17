@@ -48,7 +48,8 @@ isWinningLine p l = foldr (\a b-> b && (a==p)) True l
 
 -- Q#08
 
-hasWon = undefined
+--hasWon = undefined
+hasWon p b = any (\l->isWinningLine p l) (getAllLines b)
 
 -- Q#09
 
