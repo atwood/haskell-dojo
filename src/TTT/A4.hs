@@ -36,11 +36,15 @@ formatRows brd = map formatLine (map showSquares brd)
 
 -- Q#06
 
-isWinningLine_ = undefined
+--isWinningLine_ = undefined
+--isWinningLine p [] = False
+--isWinningLine p l = all (==p) l
+isWinningLine_ p l = (fromIntegral _SIZE_) == length (filter (==p) l)
 
 -- Q#07
 
-isWinningLine = undefined
+isWinningLine p [] = False
+isWinningLine p l = foldr (\a b-> b && (a==p)) True l
 
 -- Q#08
 
