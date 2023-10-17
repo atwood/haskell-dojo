@@ -7,23 +7,32 @@ import TTT.A3 (getAllLines, putSquare)
 
 -- Q#01
 
-_HEADER_ = undefined
+--_HEADER_ = undefined
+_HEADER_ = (" " ++ (concatMap (_SEP_ ++) r) ++ _SEP_ ) where
+    s = _SIZE_ -1   -- zero-based
+    r = map show [0.. s]
+
 
 -- Q#02
 
-showSquares = undefined
+-- showSquares = undefined
+showSquares lst = map show lst
 
 -- Q#03
 
-dropFirstCol = undefined
+--dropFirstCol = undefined
+dropFirstCol board = map (drop 1) board
 
 -- Q#04
 
-dropLastCol = undefined
+--dropLastCol = undefined
+dropLastCol board = map (take (fromIntegral (_SIZE_ - 1))) board
+
 
 --Q#05
 
-formatRows = undefined
+--formatRows = undefined
+formatRows brd = map formatLine (map showSquares brd)
 
 -- Q#06
 
