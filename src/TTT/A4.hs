@@ -70,8 +70,14 @@ playMove p b mv =
 
 -- Q#10
 
-prependRowIndices = undefined
-
+--prependRowIndices = undefined
+{-
+prependRowIndices lst = map f (zip idxs lst) where
+    idxs = ['A','B'..]
+    f (idx,str) = idx:str
+-}
+prependRowIndices lst = zipWith (:) idxs lst where
+    idxs = ['A','B'..]
 -- Q#11
 
 formatBoard = undefined
