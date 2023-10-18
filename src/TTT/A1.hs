@@ -35,7 +35,7 @@ _SEP_ = "_|_"
 
 -- Q#06
 
-data Square = X | O | Empty deriving (Read, Show, Eq)
+data Square = X | O | E deriving (Read, Show, Eq)
 -- Q#07
 
 data GameState = XWon | OWon | Tie | InProgress deriving (Read, Show, Eq)
@@ -61,7 +61,7 @@ getFirstPlayer_ False = O
 -}
 getFirstPlayer_ p | p == 'X' = X
 getFirstPlayer_ p | p == 'O' = O
-getFirstPlayer_ p | True     = Empty
+getFirstPlayer_ p | True     = E
 
 -- Q#10
 
@@ -83,11 +83,11 @@ showGameState state = case state of
 -- switchPlayer = undefined
 switchPlayer X = O
 switchPlayer O = X
-switchPlayer Empty = Empty
+switchPlayer E = E
 
 -- Q#12
 
 -- showSquare = undefined
-showSquare X     = "X"
-showSquare O     = "O"
-showSquare Empty = "_"
+showSquare X = "X"
+showSquare O = "O"
+showSquare E = "_"

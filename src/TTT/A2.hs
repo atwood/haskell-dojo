@@ -9,6 +9,7 @@ import GHC.RTS.Flags (DebugFlags(stable))
 -- Q#01
 
 -- promptPlayer = undefined
+{-
 promptPlayer p = do
     -- print $ "blah " ++ (show p) ++ " asdfsadf"
     -- print $ "Player " ++ (show p) ++ "'s turn: enter a row and column position (ex. A1)"   
@@ -17,6 +18,12 @@ promptPlayer p = do
                    , "'s turn: enter a row and column position (ex. A1)"
                    ] 
     return getLine
+-}
+promptPlayer p = concat ["Player "
+                   ,show p
+                   , "'s turn: enter a row and column position (ex. A1)"
+                   ] 
+
 -- Q#02
 
 -- _RANGE_ = undefined
@@ -33,7 +40,7 @@ readDigit c | True = -1
 -- Q#04
 
 -- _EMPTY_ROW_ = undefined
-_EMPTY_ROW_ = replicate (fromInteger _SIZE_) Empty
+_EMPTY_ROW_ = replicate (fromInteger _SIZE_) E
 
 -- _EMPTY_BOARD_ = undefined
 _EMPTY_BOARD_ = replicate (fromInteger _SIZE_) _EMPTY_ROW_
@@ -41,7 +48,7 @@ _EMPTY_BOARD_ = replicate (fromInteger _SIZE_) _EMPTY_ROW_
 -- Q#05
 
 -- isTied = undefined
-isTied b = not.any (==Empty) $ foldl1 (++) b
+isTied b = not.any (==E) $ foldl1 (++) b
 
 -- _TIED_BOARD_ = undefined
 _TIED_BOARD_ :: Board

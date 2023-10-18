@@ -59,7 +59,7 @@ getGameState b | (hasWon O b) = OWon
 getGameState b | isInProgress b = InProgress
 getGameState b = Tie
 
-isInProgress b = any (==Empty) (concat b)
+isInProgress b = any (==E) (concat b)
 
 --playMove = undefined
 playMove :: Player -> Board -> Move -> (GameState, Board)

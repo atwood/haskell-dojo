@@ -42,10 +42,10 @@ formatRows brd = map formatLine (map showSquares brd)
 --isColEmpty = undefined
 --isColEmpty row idx = Empty == row !! idx
 isColEmpty [] idx = True
-isColEmpty row idx = Empty == head row && (isColEmpty (tail row) (idx-1))
+isColEmpty row idx = E == head row && (isColEmpty (tail row) (idx-1))
 --isColEmpty 
-isRowEmpty (c:[]) = (c==Empty)
-isRowEmpty (c:tail) = (c==Empty) && (isRowEmpty tail)
+isRowEmpty (c:[]) = (c==E)
+isRowEmpty (c:tail) = (c==E) && (isRowEmpty tail)
 
 -- Q#05
 
