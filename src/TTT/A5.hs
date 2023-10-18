@@ -73,8 +73,12 @@ endGame (gs, b') = do
 -- Q#06
 
 runTTT :: IO ()
-runTTT = putStrLn "Not implemented... yet!"
-
+--runTTT = putStrLn "Not implemented... yet!"
+runTTT = do
+    partialApp <- return $ play _EMPTY_BOARD_ 
+    p <- firstPlayer
+    print p
+    partialApp p
 -- Q#07
 
 printLogoDo = undefined
