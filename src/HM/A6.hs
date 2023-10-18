@@ -4,13 +4,26 @@ import Data.Char (isAlpha)
 import HM.Provided
 
 -- Q#01
+type Chances = Int
+type Guess   = String
+type Move    = Char
+type Secret  = String
+type Dictionary = [String]
 
 -- Q#02
-data GameException
+data GameException =
+      InvalidChars
+    | InvalidLength
+    | NotInDict
+    | InvalidMove
+    | RepeatMove
+    | GameOver
+    deriving (Eq, Read, Show)
 
 -- Q#03
-
-lengthInRange = undefined
+--_LENGTH_ = (4,6)
+lengthInRange l = l >= min' && (l <= max') where
+    t@(min',max') = _LENGTH_
 
 -- Q#04
 
