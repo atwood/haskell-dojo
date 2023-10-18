@@ -88,5 +88,5 @@ formatBoard b =
 --    in putStrLn $ concatMap (++"\n") $ (_HEADER_ :prependRowIndices b')
         b''  = _HEADER_ :prependRowIndices b'
         b''' = concatMap (++"\n") b''
-   in putStrLn b''' 
+   in b''' 
 
