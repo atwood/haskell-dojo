@@ -81,16 +81,22 @@ runTTT = do
     partialApp p
 -- Q#07
 
-printLogoDo = undefined
+--printLogoDo = undefined
+printLogoDo = printLogo
 
 -- Q#08
 
-firstPlayerDo = undefined
+--firstPlayerDo = undefined
+firstPlayerDo = firstPlayer
 
 -- Q#09
 
-getMoveDo = undefined
+--getMoveDo = undefined
+getMoveDo = do
+    m <- getMove _EMPTY_BOARD_ X
+    return m
 
 -- Q#10
 
-playDo = undefined
+--playDo = undefined
+playDo = runTTT
