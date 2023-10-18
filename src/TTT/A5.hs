@@ -41,8 +41,8 @@ f = do
 -- Q#04
 
 --getMove = undefined
-getMove b = do
-    putStrLn (promptPlayer X)
+getMove b p = do
+    putStrLn (promptPlayer p)
     i <- getLine
     m <- return (stringToMove i)
     m' <-return (fromIntegral (fst m), (fromIntegral (snd m)))
@@ -52,10 +52,23 @@ getMove b = do
        else do 
               print "\n\nTry again, ex: B1"
               printBoard b
-              getMove b
+              getMove b p
 -- Q#05
 
-play = undefined
+--play = undefined
+play b p = 
+    do if _DISPLAY_LOGO_ then printLogo
+                         else return ()
+       printBoard b
+       m <- getMove b p
+       (gs,b') <- return $ playMove p b (fromIntegral (fst m),fromIntegral (snd m))
+       printBoard b'
+       if (InProgress /= gs) then endGame (gs,b')
+          else play b' (switchPlayer p) 
+
+endGame (gs, b') = do
+    print$ showGameState gs
+    printBoard b'
 
 -- Q#06
 
