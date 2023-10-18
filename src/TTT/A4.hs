@@ -80,4 +80,13 @@ prependRowIndices lst = zipWith (:) idxs lst where
     idxs = ['A','B'..]
 -- Q#11
 
-formatBoard = undefined
+--formatBoard = undefined
+formatBoard b = 
+    --putStrLn $ concatMap (++"\n") $ (_HEADER_ :prependRowIndices (formatRows b))
+    
+    let b'   = formatRows b
+--    in putStrLn $ concatMap (++"\n") $ (_HEADER_ :prependRowIndices b')
+        b''  = _HEADER_ :prependRowIndices b'
+        b''' = concatMap (++"\n") b''
+   in putStrLn b''' 
+
