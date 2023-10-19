@@ -48,7 +48,9 @@ reveal s g idx = let
 
 -- Q#06
 
-updateChances = undefined
+updateChances m s c | elem m s = c
+updateChances m s c            = c - 1
+
 
 -- Q#07
 
