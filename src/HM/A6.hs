@@ -19,7 +19,7 @@ data GameException =
     | InvalidMove
     | RepeatMove
     | GameOver
-    deriving (Eq, Read, Show)
+    deriving (Eq, Read) --, Show)
 
 -- Q#03
 --_LENGTH_ = (4,6)
