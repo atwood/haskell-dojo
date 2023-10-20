@@ -53,6 +53,19 @@ updateChances m s c            = c - 1
 
 
 -- Q#07
+-- I'm not using the provided showInput, which calls hSetEcho. Instead, I'm backspacing and printing a '*'
+setSecret = do
+  putStr "Enter a Secret word: "
+  accumHelper []
 
-setSecret = undefined
+accumHelper acc = do
+ c<-getChar
+ if (c == '\n') 
+    then return acc
+    else do
+       putStr (['\b'] ++ ['*'])
+       accumHelper $ acc++[c]  
+ --return ()
+ 
+
 
