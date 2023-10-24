@@ -20,6 +20,14 @@ data GameException =
     | RepeatMove
     | GameOver
     deriving (Eq, Read) --, Show)
+instance Show GameException where
+  show InvalidChars = "your guess must be a-z"
+  show InvalidLength = "your guess must be between" ++ (show _LENGTH_) ++ " long"
+  show NotInDict    = "this word isn't in our dictionary"
+  show InvalidMove  = "invalid move"
+  show RepeatMove   = "you've already guessed that"
+  show GameOver     = "game over"
+
 
 -- Q#03
 --_LENGTH_ = (4,6)

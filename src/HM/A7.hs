@@ -53,13 +53,6 @@ showGameHelper game moves chances =
 
 -- Q#06
 
-instance Show GameException where
-  show InvalidChars = "your guess must be a-z"
-  show InvalidLength = "your guess must be between" ++ (show _LENGTH_) ++ " long"
-  show NotInDict    = "this word isn't in our dictionary"
-  show InvalidMove  = "invalid move"
-  show RepeatMove   = "you've already guessed that"
-  show GameOver     = "game over"
 
 -- Q#07
 
@@ -72,25 +65,52 @@ toMaybe True  a = Just a
 validateSecret f exc secret = case (f exc secret) of
   True -> Left secret
   False -> Right (show exc)
-  where f InvalidChars = hasValidChars
+  where f InvalidChars  = hasValidChars 
+        f NotInDict     = isInDict _DICT_ 
         f InvalidLength = isValidLength
-        f NotInDict     = isInDict _DICT_
-        --f InvalidMove   = repeatedMove	
-
+        
 -- Q#09
 
+hasValidChars :: String -> Bool
 hasValidChars sec = all (isAlpha) sec
 
+isValidLength :: String -> Bool
 isValidLength sec = lengthInRange sec
 
-isInDict dict sec =  elem sec dict
+isInDict :: [String] -> String -> Bool
+isInDict dict sec =  elem (map toLower sec) dict
+
 _DICT_ = ["bank"]
+
 -- Q#10
 
-validateNoDict = undefined
+validateNoDict sec = 
+  if not (hasValidChars sec) then Right InvalidChars
+     else if not (isValidLength sec) then Right InvalidLength
+     else Left sec
 
-validateWithDict = undefined
+validateWithDict dict sec = case (validateNoDict sec) of
+  Right exc -> Right exc
+  Left s    -> if not (isInDict dict s) then Right NotInDict
+                 else Left s
+  
 
 -- Q#11
 
-processTurn = undefined
+processTurn mv gm = let
+   g' = updateGame mv gm
+   --in case (g g')==(g gm) of
+   in g'
+   
+-- Either Game GameException
+
+pT mv gm | invalidMove mv = Right InvalidChars
+pT mv gm | repeatedMove mv gm = Right RepeatMove
+pT mv gm = let
+   g' = updateGame mv gm
+   in case (g g')==(g gm) of
+      True -> Left $ g' {c=updateChances mv (s gm) (c gm)}
+      False -> Left $ g'  
+--1) validChar
+--2) char already chosen
+--3) play and chances
