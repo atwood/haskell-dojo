@@ -45,10 +45,37 @@ gD = do
 getDict = fmap toMaybe isDictNonEmpty <*> _DICT_
 -- Q#05
 
-validateNoDict = undefined
+validateNoDict sec = foldl (f sec) (Left sec) 
+      [(hasValidChars, InvalidChars), (isValidLength, InvalidLength)]
+{-
+2023Oct25 JWA: I'm confused as to whether to change the signature of this function
+Con: I'm just rewriting it
+Pro: there's no need to pass in a dict, since we're calling getDict
+-}
+validateWithDict dummyParam sec = getDict >>= (w sec)
+w sec maybeDict = case maybeDict of
+  (Just dict) -> return$ vWdWork dict sec 
+  --Nothing     -> return$ vWdWork [] sec 
+--validateWithDictDriver sec = getDict >>= 
 
-validateWithDict = undefined
+vWdWork dict sec = let
+  a = (validateNoDict sec)
+  in foldl (f sec) a [((isInDict dict), NotInDict)]
 
+g secrt = foldl (f secrt) (Left secrt) lst
+f = \secrt reslt (pred,exc) -> if pred secrt then reslt else (Right exc)
+lst = [(hasValidChars, InvalidChars), (isValidLength, InvalidLength)]
+{-
+validateNoDict sec = 
+  if not (hasValidChars sec) then Right InvalidChars
+     else if not (isValidLength sec) then Right InvalidLength
+     else Left sec
+
+validateWithDict dict sec = case (validateNoDict sec) of
+  Right exc -> Right exc
+  Left s    -> if not (isInDict dict s) then Right NotInDict
+                 else Left s
+-}
 -- Q#06
 
 playGame = undefined
