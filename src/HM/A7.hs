@@ -66,7 +66,7 @@ validateSecret f exc secret = case (f exc secret) of
   True -> Left secret
   False -> Right (show exc)
   where f InvalidChars  = hasValidChars 
-        f NotInDict     = isInDict _DICT_ 
+        --f NotInDict     = isInDict _DICT_ 
         f InvalidLength = isValidLength
         
 -- Q#09
@@ -79,8 +79,6 @@ isValidLength sec = lengthInRange sec
 
 isInDict :: [String] -> String -> Bool
 isInDict dict sec =  elem (map toLower sec) dict
-
-_DICT_ = ["bank"]
 
 -- Q#10
 

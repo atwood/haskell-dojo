@@ -8,26 +8,41 @@ import HM.Provided
 import System.Directory (doesFileExist)
 
 -- Q#01
-
-getUpperChar = undefined
-
+{-
+getUpperChar = do
+  c<-getChar
+  return $ toUpper c
+-}
+--getUpperChar = do c<-getChar;return $ toUpper c
+getUpperChar = fmap toUpper getChar
 -- Q#02
-
+{-
 _DICT_ = do
   fileExists <- doesFileExist _DICT_FILE_
   if fileExists then undefined else undefined
+-}
+_DICT_ = do
+  fileExists <- doesFileExist "../../assets/dict.txt"  --_DICT_FILE_  - directory problems in moving to local install, 
+  if fileExists then fmap words (readFile "../../assets/dict.txt") else pure []
+-- _DICT_ = ["bank", "dog"]
+
 
 isDictNonEmpty :: IO Bool
-isDictNonEmpty = undefined
+isDictNonEmpty = fmap (not.null) _DICT_
 
 -- Q#03
 
-makeGameIfValid = undefined
+--makeGameIfValid e@(Left exc)  = e
+makeGameIfValid e = fmap makeGame e 
 
 -- Q#04
 
-getDict = undefined
+gD = do
+   d <- _DICT_ 
+   b <- isDictNonEmpty
+   return$ if b then Just d else Nothing
 
+getDict = fmap toMaybe isDictNonEmpty <*> _DICT_
 -- Q#05
 
 validateNoDict = undefined
