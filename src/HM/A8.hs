@@ -32,8 +32,10 @@ isDictNonEmpty = fmap (not.null) _DICT_
 
 -- Q#03
 
+makeGameIfValid:: Either GameException String -> Either GameException Game 
 --makeGameIfValid e@(Left exc)  = e
 makeGameIfValid e = fmap makeGame e 
+--makeGameIfValid g::Game  = fmap makeGame g 
 
 -- Q#04
 
@@ -62,7 +64,7 @@ vWdWork dict sec = let
   a = (validateNoDict sec)
   in foldl (f sec) a [((isInDict dict), NotInDict)]
 
-g secrt = foldl (f secrt) (Left secrt) lst
+h  secrt = foldl (f secrt) (Left secrt) lst
 f = \secrt reslt (pred,exc) -> if pred secrt then reslt else (Right exc)
 lst = [(hasValidChars, InvalidChars), (isValidLength, InvalidLength)]
 {-
@@ -78,12 +80,55 @@ validateWithDict dict sec = case (validateNoDict sec) of
 -}
 -- Q#06
 
-playGame = undefined
-
+playGame game = do
+  print game
+  promptGuess
+  guess <- getUpperChar
+  _SPACE_
+  eithGame' <- return$ processTurn guess game
+  print eithGame'
+  case eithGame' of
+    (Left gm) -> do
+        if not (elem '_' (g gm))
+            then
+                 putStr "\n\nYou Win!\n"
+            else if (0 == (c gm)) && (elem '_' (g gm))
+            then 
+                putStr "\nSorry, You Lose!\n\n"
+            else playGame gm
+    (Right GameOver) -> do
+        print GameOver
+--    (Right exc) -> do
+    (Right InvalidMove) -> do
+        print InvalidMove
+        playGame game
+    (Right InvalidChars) -> do
+        print InvalidChars
+        playGame game
+    (Right exc@RepeatMove) -> do
+        print exc
+        playGame game
+  return()
+  
 -- Q#07
 
-startGame = undefined
-
+startGame validatorFunc = do
+  s  <- setSecret
+  s2 <- validatorFunc s
+  --s2 <- return s
+  possibleGame  <- return$ makeGameIfValid (Right s2)
+  print possibleGame
+  case possibleGame of
+    (Left exc) -> do 
+             print exc
+             startGame validatorFunc
+    (Right gm)  -> do
+             playGame gm
+ 
+  return ()
+  
+s = playGame (makeGame "bank")
+go = startGame (\x->return x)
 -- Q#08
 
 runHM :: IO ()

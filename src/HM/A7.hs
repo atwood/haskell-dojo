@@ -94,14 +94,15 @@ validateWithDict dict sec = case (validateNoDict sec) of
   
 
 -- Q#11
-
+{-
 processTurn mv gm = let
    g' = updateGame mv gm
    --in case (g g')==(g gm) of
    in g'
    
 -- Either Game GameException
-
+-}
+processTurn = pT
 pT mv gm | invalidMove mv = Right InvalidChars
 pT mv gm | repeatedMove mv gm = Right RepeatMove
 pT mv gm = let
