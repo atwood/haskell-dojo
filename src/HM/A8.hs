@@ -93,8 +93,9 @@ playGame game = do
             then
                  putStr "\n\nYou Win!\n"
             else if (0 == (c gm)) && (elem '_' (g gm))
-            then 
+            then do
                 putStr "\nSorry, You Lose!\n\n"
+                putStr$ ("word was: " ++ (s gm) ++ "\n\n\n" )
             else playGame gm
     (Right GameOver) -> do
         print GameOver
@@ -127,9 +128,9 @@ startGame validatorFunc = do
  
   return ()
   
-s = playGame (makeGame "bank")
+st = playGame (makeGame "bank")
 go = startGame (\x->return x)
 -- Q#08
 
 runHM :: IO ()
-runHM = putStrLn "Not implemented... yet!"
+runHM = putStrLn "Not implemented... yet!  Run HM by typing 'go'."
